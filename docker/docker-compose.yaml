@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:14
+    container_name: workflow-db
+    environment:
+      - POSTGRES_USER=workflow
+      - POSTGRES_PASSWORD=workflow
+      - POSTGRES_DB=workflow
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - pg-logs:/var/log/postgresql
+    ports:
+    - 5432:5432
+    networks:
+      - internal
+
+networks:
+  internal:
+    name: workflow-backend
+
+volumes:
+  pg-data:
+  pg-logs:
